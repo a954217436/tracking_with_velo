@@ -23,9 +23,10 @@ class KalmanBoxTrackerCA
             return count_;
         }
 
-        void Update();
+        void Update(const Eigen::VectorXd& observation);
         void Predict();
-        void GetState(std::string& res);
+        Eigen::VectorXd GetState();
+        void GetStateString(std::string& res);
 
     // private:
         LifeManager life_manager_;

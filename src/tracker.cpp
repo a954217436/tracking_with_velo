@@ -39,20 +39,26 @@ KalmanBoxTrackerCA::KalmanBoxTrackerCA() : kalman_filter_(11, 7)
     kalman_filter_.Q_ = Eigen::MatrixXd::Identity(11, 11);
 }
 
-void KalmanBoxTrackerCA::Update()
+void KalmanBoxTrackerCA::Update(const Eigen::VectorXd& observation)
 {
+    kalman_filter_.Update(observation);
+
     life_manager_.update();
 }
 
 void KalmanBoxTrackerCA::Predict()
 {
+    kalman_filter_.Predict();
     life_manager_.predict();
 }
 
-void KalmanBoxTrackerCA::GetState(std::string& res)
+void KalmanBoxTrackerCA::GetStateString(std::string& res)
 {
     res = life_manager_.get_state_string();
 }
 
-
+Eigen::VectorXd KalmanBoxTrackerCA::GetState()
+{
+    return kalman_filter_.x_;
+}
 
