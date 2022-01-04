@@ -22,7 +22,7 @@ LifeManager::~LifeManager()
 }
 
 
-void LifeManager::update()
+void LifeManager::Update()
 {
     hits_++;
     hit_streak_++;
@@ -31,7 +31,7 @@ void LifeManager::update()
 }
 
 
-void LifeManager::predict()
+void LifeManager::Predict()
 {
     age_++;
     if(time_since_update_ > 0)

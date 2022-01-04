@@ -29,8 +29,8 @@ class LifeManager
         LifeManager(StateTransCfg st_cfg);
         ~LifeManager();
 
-        void update();
-        void predict();
+        void Update();
+        void Predict();
         void state_transition();
 
         bool is_state_valid();

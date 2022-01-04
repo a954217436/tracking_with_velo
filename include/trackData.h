@@ -28,7 +28,7 @@ enum TrackState
 
 struct TrackData 
 {
-    TrackData();
+    TrackData(){};
     TrackData(int id, 
             int label, 
             float score, 

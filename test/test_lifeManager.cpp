@@ -11,17 +11,17 @@ int main_mm123()
     LifeManager lm = LifeManager(cfg);
     cout << "state: " << lm.get_state_string() << endl;
 
-    lm.predict();
+    lm.Predict();
     cout << "state: " << lm.get_state_string() << endl;
-    lm.update();
-    cout << "state: " << lm.get_state_string() << endl;
-
-    lm.predict();
-    cout << "state: " << lm.get_state_string() << endl;
-    lm.predict();
+    lm.Update();
     cout << "state: " << lm.get_state_string() << endl;
 
-    lm.update();
+    lm.Predict();
+    cout << "state: " << lm.get_state_string() << endl;
+    lm.Predict();
+    cout << "state: " << lm.get_state_string() << endl;
+
+    lm.Update();
     cout << "state: " << lm.get_state_string() << endl;
 
     return 0;

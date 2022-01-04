@@ -2,9 +2,12 @@
 
 int KalmanBoxTrackerCA::count_ = 0;
 
-KalmanBoxTrackerCA::KalmanBoxTrackerCA() : kalman_filter_(11, 7) 
+KalmanBoxTrackerCA::KalmanBoxTrackerCA(TrackData track_data) : kalman_filter_(11, 7) 
 {
     count_++;
+    id_ = count_;
+    track_data_ = track_data;
+
     StateTransCfg state_trans_cfg;
     life_manager_ = LifeManager(state_trans_cfg);
 
@@ -39,17 +42,26 @@ KalmanBoxTrackerCA::KalmanBoxTrackerCA() : kalman_filter_(11, 7)
     kalman_filter_.Q_ = Eigen::MatrixXd::Identity(11, 11);
 }
 
+KalmanBoxTrackerCA::~KalmanBoxTrackerCA()
+{
+    // if (track_data_) 
+    // {
+    //     delete track_data_;
+    //     track_data_ = NULL;
+    // }
+    std::cout << "deconstruct : " << id_ << std::endl;
+}
+
 void KalmanBoxTrackerCA::Update(const Eigen::VectorXd& observation)
 {
     kalman_filter_.Update(observation);
-
-    life_manager_.update();
+    life_manager_.Update();
 }
 
 void KalmanBoxTrackerCA::Predict()
 {
     kalman_filter_.Predict();
-    life_manager_.predict();
+    life_manager_.Predict();
 }
 
 void KalmanBoxTrackerCA::GetStateString(std::string& res)
